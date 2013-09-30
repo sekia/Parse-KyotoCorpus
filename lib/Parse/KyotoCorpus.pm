@@ -36,7 +36,7 @@ sub do_parse {
       $current_chunk = Parse::KyotoCorpus::Chunk->new(id => $chunk_id);
       ($dependency_id, my $relation) = $dependency_id =~ /^(-?\d+)([ADP])$/;
       $dependency_ids{$chunk_id} = [$dependency_id => $relation];
-    } else {  # Morpheme
+    } else {  # Morpheme.
       my $morpheme = $self->morpheme_parser->parse($_);
       last if $morpheme->is_eos;
       $current_chunk->add_morpheme($morpheme);
