@@ -9,7 +9,7 @@ use Smart::Args;
 sub new {
   args
     my $class => 'ClassName',
-    my $dependency => +{ isa => __PACKAGE__, optional => 1, },
+    my $dependency => +{ isa => __PACKAGE__, optional => 1 },
     my $dependency_type => +{
       isa => 'Parse::KyotoCorpus::DependencyType',
       optional => 1,
@@ -50,7 +50,7 @@ sub add_morpheme {
 sub dependency {
   args_pos
     my $self,
-    my $dependency => +{ isa => __PACKAGE__, optional => 1, };
+    my $dependency => +{ isa => __PACKAGE__, optional => 1 };
 
   if (defined $dependency) {
     Scalar::Util::weaken($self->{dependency} = $dependency);

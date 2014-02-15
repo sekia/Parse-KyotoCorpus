@@ -13,7 +13,7 @@ our $VERSION = '0.01';
 sub new {
   args
     my $class => 'ClassName',
-    my $morpheme_parser;
+    my $morpheme_parser => 'Parse::KyotoCorpus::MorphemeParser';
 
   bless +{ morpheme_parser => $morpheme_parser } => $class;
 }
@@ -34,8 +34,9 @@ sub do_parse {
       $parsed_chunks{$current_chunk->id} = $current_chunk;
       my (undef, $chunk_id, $dependency_id) = split /\s+/;
       $current_chunk = Parse::KyotoCorpus::Chunk->new(id => $chunk_id);
-      ($dependency_id, my $relation) = $dependency_id =~ /^(-?\d+)([ADP])$/;
-      $dependency_ids{$chunk_id} = [$dependency_id => $relation];
+      ($dependency_id, my $dependency_type) =
+        $dependency_id =~ /^(-?\d+)([ADP])$/;
+      $dependency_ids{$chunk_id} = [$dependency_id => $dependency_type];
     } else {  # Morpheme.
       my $morpheme = $self->morpheme_parser->parse($_);
       last if $morpheme->is_eos;
@@ -63,9 +64,9 @@ sub morpheme_parser { $_[0]->{morpheme_parser} }
 sub parse {
   args
     my $self,
-    my $filename => +{ isa => 'Str', optional => 1, },
-    my $fh => +{ isa => 'FileHandle', optional => 1, },
-    my $string => +{ isa => 'Str', optional => 1, };
+    my $filename => +{ isa => 'Str', optional => 1 },
+    my $fh => +{ isa => 'FileHandle', optional => 1 },
+    my $string => +{ isa => 'Str', optional => 1 };
 
   if (none { defined } ($filename, $fh, $string)) {
     Carp::croak('No source specified.');

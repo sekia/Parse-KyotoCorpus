@@ -17,6 +17,7 @@ use Smart::Args;
 
 sub new {
   my ($class, %args) = @_;
+
   my $method =
     delete $args{is_eos} ? 'new_eos_morpheme' : 'new_normal_morpheme';
   $class->$method(%args);
@@ -32,12 +33,12 @@ sub new_eos_morpheme {
 sub new_normal_morpheme {
   args
     my $class => 'ClassName',
-    my $base_form => +{ isa => 'Str', optional => 1, },
-    my $conjugation_form_type => +{ isa => 'Str', optional => 1, },
-    my $conjugation_type => +{ isa => 'Str', optional => 1, },
+    my $base_form => +{ isa => 'Str', optional => 1 },
+    my $conjugation_form_type => +{ isa => 'Str', optional => 1 },
+    my $conjugation_type => +{ isa => 'Str', optional => 1 },
     my $pos => 'ArrayRef[Str]',
-    my $pronounciation => +{ isa => 'Str', optional => 1, },
-    my $reading => +{ isa => 'Str', optional => 1, },
+    my $pronounciation => +{ isa => 'Str', optional => 1 },
+    my $reading => +{ isa => 'Str', optional => 1 },
     my $surface => 'Str';
 
   bless +{
