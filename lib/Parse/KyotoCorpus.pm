@@ -1,6 +1,6 @@
 package Parse::KyotoCorpus;
 
-# ABSTRACT: Parse Kyoto Corpus-formatted files.
+# ABSTRACT: Parse Kyoto Corpus-formatted text.
 
 use v5.14;
 use Carp qw//;
@@ -133,6 +133,53 @@ sub parse {
 
 =head1 DESCRIPTION
 
-Parse::KyotoCorpus is a parser class for Kyoto Corpus-formatted file. In natural language processing study, the format is used as the de-facto standard of annotated japanese language text.
+Parse::KyotoCorpus is a parser class for Kyoto Corpus-formatted data.
+
+In natural language processing study, the format is used as a de-facto standard of annotated japanese language text. e.g., CaboCha and J.DepP, japanese dependency structure analyzers, are both able to output its analysis result as the format.
+
+=head1 METHODS
+
+=head2 new(morpheme_parser => $morpheme_parser)
+
+Constructor. C<morpheme_parser> is an object that implements C<parse> method (see L<Parse::KyotoCorpus::MorphemeParser::MeCab>.)
+
+=head2 parse(fh => $fh | filename => $path | string => $string)
+
+Parse Kyoto Corpus-formatted input from given source.
+Return value is an ArrayRef of L<Parse::KyotoCorpus::Chunk> objects. Each object represents a parsed result of sentence.
+
+Available input sources are:
+
+=over 4
+
+=item C<fh> - A filehandle.
+
+=item C<filename> - A path to a file containing Kyoto Corpus-formatted text.
+
+=item C<string> - A scalar holding text.
+
+=back
+
+If the given source is unavailale (e.g., given file path doesn't exist,) this method will raise an error.
+
+=head1 TODO
+
+Currently this module has only poor input validation and is not robust against invalid data. So you can not use this module for error checking or process with untrusted data source.
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<Parse::KyotoCorpus::Chunk>
+
+=item L<Parse::KyotoCorpus::MorphemeParser::MeCab>
+
+=item L<Parse::KyotoCorpus::Morpheme::MeCab>
+
+=item L<CaboCha - Yet Another Japanese Dependency Structure Analyzer|http://code.google.com/p/cabocha/>
+
+=item L<J.DepP - C++ implementation of Japanese Dependency Parsers|http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/jdepp/>
+
+=back
 
 =cut

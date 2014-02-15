@@ -48,8 +48,8 @@ Parse::KyotoCorpus::MorphemeParser::MeCab;
 
 =head1 DESCRIPTION
 
-This class parses MeCab's default node format.
+This class parses MeCab's default morpheme format.
 
-Note that MeCab's output format is configurable and this class does not care about it.
+Note that although MeCab's output format and using dictionary is configurable, this class can only parse default output format with features from IPA dictionary.
 
 =cut
