@@ -54,7 +54,7 @@ sub as_arrayref {
     my $self;
 
   unless ($self->is_root) {
-    Carp::croak('as_arryaref() method works only on root chunk.');
+    Carp::croak('as_arrayref() method works only on root chunk.');
   }
 
   $self->do_as_arrayref(\my @acc);
