@@ -170,7 +170,7 @@ If the chunk is the C<root> of dependency tree, this method returns C<undef>.
 
 =head2 dependency_type
 
-Type of dependency. the value depends on system that generated the source, even can be undefined.
+Type of dependency. Which of C<"apposition">, C<"dependency"> and C<"parallel">.
 
 =head2 dependents
 

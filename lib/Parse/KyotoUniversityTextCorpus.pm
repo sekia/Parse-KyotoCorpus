@@ -181,6 +181,8 @@ Currently this module has only poor input validation and is not robust against i
 
 =item L<Parse::KyotoUniversityTextCorpus::Morpheme::MeCab>
 
+=item L<Kyoto University Text Corpus - KUROHASHI-KAWAHARA LAB|http://nlp.ist.i.kyoto-u.ac.jp/EN/index.php?Kyoto%20University%20Text%20Corpus>
+
 =item L<CaboCha - Yet Another Japanese Dependency Structure Analyzer|http://code.google.com/p/cabocha/>
 
 =item L<J.DepP - C++ implementation of Japanese Dependency Parsers|http://www.tkl.iis.u-tokyo.ac.jp/~ynaga/jdepp/>
