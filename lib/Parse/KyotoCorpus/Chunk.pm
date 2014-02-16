@@ -49,6 +49,18 @@ sub add_morpheme {
   push @{ $self->morphemes }, $morpheme;
 }
 
+sub as_arrayref {
+  args
+    my $self;
+
+  unless ($self->is_root) {
+    Carp::croak('as_arryaref() method works only on root chunk.');
+  }
+
+  $self->do_as_arrayref(\my @acc);
+  [ sort { $a->id <=> $b->id } @acc ];
+}
+
 sub dependency {
   args_pos
     my $self,
@@ -74,6 +86,28 @@ sub dependency_type {
 }
 
 sub dependents { $_[0]->{dependents} }
+
+sub depends {
+  args
+    my $self,
+    my $on => __PACKAGE__,
+    my $transitive => +{ isa => 'Bool', default => 0 };
+
+  return if $self->is_root;
+  return 1 if $on->is_root;
+  return 1 if $self->dependency == $on;
+  return unless $transitive;
+  $self->dependency->depends(on => $on, transitive => $transitive);
+}
+
+sub do_as_arrayref {
+  args_pos
+    my $self,
+    my $acc => sprintf('ArrayRef[%s]', __PACKAGE__);
+
+  push @$acc, $self;
+  $_->do_as_arrayref($acc) for values %{ $self->dependents };
+}
 
 sub id { $_[0]->{id} }
 
@@ -124,6 +158,10 @@ Normally you will get instances of this class as return value of L<Parse::KyotoC
 
 =head1 METHODS
 
+=head2 as_arrayref
+
+Returns an ArrayRef of chunks sorted in order of C<id>. This method works only on C<root> chunk.
+
 =head2 dependency
 
 Returns another chunk that this chunk depends on.
@@ -137,6 +175,12 @@ Type of dependency. the value depends on system that generated the source, even 
 =head2 dependents
 
 HashRef of chunks which depend on this chunk. Its key is each chunk's C<id>.
+
+=head2 depends(on => $chunk [, transitive => $bool])
+
+Returns true if this chunk has a dependency on C<$chunk>. False otherwise.
+
+If optional parameter C<transitive> is set true (false is default value,) this method searches dependency transitively. e.g., C<$chunk_a> depends on C<$chunk_b> and C<$chunk_b> depends on C<$chunk_c>, C<< $chunk_a->depends(on => $chunk_c) >> is false but C<< $chunk_a->depends(on => $chunk_c, transitive => 1) >> returns true.
 
 =head2 id
 
