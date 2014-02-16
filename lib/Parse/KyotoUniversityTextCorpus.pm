@@ -1,11 +1,11 @@
-package Parse::KyotoCorpus;
+package Parse::KyotoUniversityTextCorpus;
 
-# ABSTRACT: Parse Kyoto Corpus-formatted text.
+# ABSTRACT: Parse Kyoto University Text Corpus-formatted text.
 
 use v5.14;
 use Carp qw//;
 use List::MoreUtils qw/none/;
-use Parse::KyotoCorpus::Chunk;
+use Parse::KyotoUniversityTextCorpus::Chunk;
 use Smart::Args;
 
 our $VERSION = '0.01';
@@ -13,7 +13,7 @@ our $VERSION = '0.01';
 sub new {
   args
     my $class => 'ClassName',
-    my $morpheme_parser => 'Parse::KyotoCorpus::MorphemeParser';
+    my $morpheme_parser => 'Parse::KyotoUniversityTextCorpus::MorphemeParser';
 
   bless +{ morpheme_parser => $morpheme_parser } => $class;
 }
@@ -25,7 +25,7 @@ sub do_parse {
 
   my %dependency_ids;
   my %parsed_chunks;
-  my $current_chunk = Parse::KyotoCorpus::Chunk->new(id => -1);
+  my $current_chunk = Parse::KyotoUniversityTextCorpus::Chunk->new(id => -1);
   while (<$fh>) {
     chomp;
     next if /^#/;
@@ -33,7 +33,8 @@ sub do_parse {
     if (/^\*/) {  # Chunk header.
       $parsed_chunks{$current_chunk->id} = $current_chunk;
       my (undef, $chunk_id, $dependency_id) = split /\s+/;
-      $current_chunk = Parse::KyotoCorpus::Chunk->new(id => $chunk_id);
+      $current_chunk =
+        Parse::KyotoUniversityTextCorpus::Chunk->new(id => $chunk_id);
       ($dependency_id, my $dependency_type) =
         $dependency_id =~ /^(-?\d+)([ADP])$/;
       $dependency_ids{$chunk_id} = [$dependency_id => $dependency_type];
@@ -92,10 +93,11 @@ sub parse {
 
 =head1 SYNOPSIS
 
-    use Parse::KyotoCorpus;
-    use Parse::KyotoCorpus::MorphemeParser::MeCab;
-    my $parser = Parser::KyotoCorpus->new(
-      morpheme_parser => Parse::KyotoCorpus::MorphemeParser::MeCab->new,
+    use Parse::KyotoUniversityTextCorpus;
+    use Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab;
+    my $parser = Parser::KyotoUniversityTextCorpus->new(
+      morpheme_parser =>
+        Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab->new,
     );
     
     my $dependency_trees = $parser->parse(string => <<'EOT');
@@ -136,7 +138,7 @@ sub parse {
 
 =head1 DESCRIPTION
 
-Parse::KyotoCorpus is a parser class for Kyoto Corpus-formatted data.
+Parse::KyotoUniversityTextCorpus is a parser class for Kyoto University Text Corpus-formatted data.
 
 In natural language processing study, the format is used as a de-facto standard of annotated japanese language text. e.g., CaboCha and J.DepP, japanese dependency structure analyzers, are both able to output its analysis result as the format.
 
@@ -144,12 +146,12 @@ In natural language processing study, the format is used as a de-facto standard 
 
 =head2 new(morpheme_parser => $morpheme_parser)
 
-Constructor. C<morpheme_parser> is an object that implements C<parse> method (see L<Parse::KyotoCorpus::MorphemeParser::MeCab>.)
+Constructor. C<morpheme_parser> is an object that implements C<parse> method (see L<Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab>.)
 
 =head2 parse(fh => $fh | filename => $path | string => $string)
 
-Parse Kyoto Corpus-formatted input from given source.
-Return value is an ArrayRef of L<Parse::KyotoCorpus::Chunk> objects. Each object represents a parsed result of sentence.
+Parse Kyoto University Text Corpus-formatted input from given source.
+Return value is an ArrayRef of L<Parse::KyotoUniversityTextCorpus::Chunk> objects. Each object represents a parsed result of sentence.
 
 Available input sources are:
 
@@ -157,7 +159,7 @@ Available input sources are:
 
 =item C<fh> - A filehandle.
 
-=item C<filename> - A path to a file containing Kyoto Corpus-formatted text.
+=item C<filename> - A path to a file containing Kyoto University Text Corpus-formatted text.
 
 =item C<string> - A scalar holding text.
 
@@ -173,11 +175,11 @@ Currently this module has only poor input validation and is not robust against i
 
 =over 4
 
-=item L<Parse::KyotoCorpus::Chunk>
+=item L<Parse::KyotoUniversityTextCorpus::Chunk>
 
-=item L<Parse::KyotoCorpus::MorphemeParser::MeCab>
+=item L<Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab>
 
-=item L<Parse::KyotoCorpus::Morpheme::MeCab>
+=item L<Parse::KyotoUniversityTextCorpus::Morpheme::MeCab>
 
 =item L<CaboCha - Yet Another Japanese Dependency Structure Analyzer|http://code.google.com/p/cabocha/>
 

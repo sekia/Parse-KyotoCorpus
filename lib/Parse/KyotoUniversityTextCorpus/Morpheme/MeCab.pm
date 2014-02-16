@@ -1,4 +1,4 @@
-package Parse::KyotoCorpus::Morpheme::MeCab;
+package Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 
 use v5.14;
 use Class::Accessor::Lite (

@@ -1,7 +1,7 @@
-package Parse::KyotoCorpus::MorphemeParser::MeCab;
+package Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab;
 
 use v5.14;
-use Parse::KyotoCorpus::Morpheme::MeCab;
+use Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 use Smart::Args;
 
 sub new { bless \my $dummy => $_[0] }
@@ -12,7 +12,7 @@ sub parse {
     my $line => 'Str';
 
   if ($line eq 'EOS') {
-    return Parse::KyotoCorpus::Morpheme::MeCab->new(is_eos => 1);
+    return Parse::KyotoUniversityTextCorpus::Morpheme::MeCab->new(is_eos => 1);
   }
   my ($surface, $feature) = split /\t/, $line, 2;
   my @feature = map { $_ eq '*' ? undef : $_ } split /,/, $feature;
@@ -25,7 +25,7 @@ sub parse {
     $reading,
     $pronounciation,
   ) = @feature;
-  Parse::KyotoCorpus::Morpheme::MeCab->new(
+  Parse::KyotoUniversityTextCorpus::Morpheme::MeCab->new(
     +(defined $base_form ? (base_form => $base_form) : ()),
     +(defined $conjugation_form_type
         ? (conjugation_form_type => $conjugation_form_type) : ()),
@@ -44,7 +44,7 @@ __DATA__
 
 =head1 NAME
 
-Parse::KyotoCorpus::MorphemeParser::MeCab;
+Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab;
 
 =head1 DESCRIPTION
 

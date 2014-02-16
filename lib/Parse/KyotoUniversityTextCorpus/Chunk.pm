@@ -1,10 +1,10 @@
-package Parse::KyotoCorpus::Chunk;
+package Parse::KyotoUniversityTextCorpus::Chunk;
 
 # ABSTRACT: Dependency structure representation.
 
 use v5.14;
 use Carp qw//;
-use Parse::KyotoCorpus::Types;
+use Parse::KyotoUniversityTextCorpus::Types;
 use Scalar::Util qw//;
 use Smart::Args;
 
@@ -13,7 +13,7 @@ sub new {
     my $class => 'ClassName',
     my $dependency => +{ isa => __PACKAGE__, optional => 1 },
     my $dependency_type => +{
-      isa => 'Parse::KyotoCorpus::DependencyType',
+      isa => 'Parse::KyotoUniversityTextCorpus::DependencyType',
       optional => 1,
     },
     my $dependents => +{
@@ -22,7 +22,7 @@ sub new {
     },
     my $id => 'Int',
     my $morphemes => +{
-      isa => 'ArrayRef[Parse::KyotoCorpus::Morpheme]',
+      isa => 'ArrayRef[Parse::KyotoUniversityTextCorpus::Morpheme]',
       optional => 1,
     };
 
@@ -44,7 +44,7 @@ sub new {
 sub add_morpheme {
   args_pos
     my $self,
-    my $morpheme => 'Parse::KyotoCorpus::Morpheme';
+    my $morpheme => 'Parse::KyotoUniversityTextCorpus::Morpheme';
 
   push @{ $self->morphemes }, $morpheme;
 }
@@ -77,7 +77,7 @@ sub dependency_type {
   args_pos
     my $self,
     my $dependency_type => +{
-      isa => 'Parse::KyotoCorpus::DependencyType',
+      isa => 'Parse::KyotoUniversityTextCorpus::DependencyType',
       optional => 1,
     };
 
@@ -133,9 +133,9 @@ sub surface { join '', map { $_->surface } @{ $_[0]->morphemes } }
 
 =head1 SYNOPSIS
 
-    use Parse::KyotoCorpus;
+    use Parse::KyotoUniversityTextCorpus;
     
-    my $parser = Parse::KyotoCorpus->new(...);
+    my $parser = Parse::KyotoUniversityTextCorpus->new(...);
     my $results = $parser->parse(...);
     
     # Print simple dependency tree for each sentence.
@@ -154,7 +154,7 @@ sub surface { join '', map { $_->surface } @{ $_[0]->morphemes } }
 
 This class represents a chunk of words recognized as a unit called bunsetsu (文節) in japanese language syntax.
 
-Normally you will get instances of this class as return value of L<Parse::KyotoCorpus>'s C<parse> method. The returned chunk is the root of a dependency tree of a sentence. You can traverse the dependency structure from the root chunk.
+Normally you will get instances of this class as return value of L<Parse::KyotoUniversityTextCorpus>'s C<parse> method. The returned chunk is the root of a dependency tree of a sentence. You can traverse the dependency structure from the root chunk.
 
 =head1 METHODS
 

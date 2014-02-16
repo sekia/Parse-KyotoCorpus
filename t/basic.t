@@ -3,11 +3,12 @@ use warnings;
 use utf8;
 use Test::More;
 
-use_ok 'Parse::KyotoCorpus';
-use_ok 'Parse::KyotoCorpus::MorphemeParser::MeCab';
+use_ok 'Parse::KyotoUniversityTextCorpus';
+use_ok 'Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab';
 
-my $morpheme_parser = new_ok 'Parse::KyotoCorpus::MorphemeParser::MeCab';
-my $parser = new_ok 'Parse::KyotoCorpus' => [
+my $morpheme_parser =
+  new_ok 'Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab';
+my $parser = new_ok 'Parse::KyotoUniversityTextCorpus' => [
   morpheme_parser => $morpheme_parser,
 ];
 
