@@ -2,7 +2,7 @@ package Parse::KyotoUniversityTextCorpus::Chunk;
 
 # ABSTRACT: Dependency structure representation.
 
-use v5.14;
+use v5.10;
 use Carp qw//;
 use Parse::KyotoUniversityTextCorpus::Types;
 use Scalar::Util qw//;

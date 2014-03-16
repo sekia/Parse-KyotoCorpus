@@ -1,6 +1,6 @@
 package Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab;
 
-use v5.14;
+use v5.10;
 use Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 use Smart::Args;
 

@@ -1,6 +1,6 @@
 package Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 
-use v5.14;
+use v5.10;
 use Class::Accessor::Lite (
   ro => [
     qw/base_form
