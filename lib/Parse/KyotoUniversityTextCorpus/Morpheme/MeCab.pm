@@ -1,5 +1,7 @@
 package Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 
+use strict;
+use warnings;
 use v5.10;
 use Class::Accessor::Lite (
   ro => [

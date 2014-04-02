@@ -2,6 +2,8 @@ package Parse::KyotoUniversityTextCorpus;
 
 # ABSTRACT: Parse Kyoto University Text Corpus-formatted text.
 
+use strict;
+use warnings;
 use v5.10;
 use Carp qw//;
 use List::MoreUtils qw/none/;

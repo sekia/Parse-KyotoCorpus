@@ -2,6 +2,8 @@ package Parse::KyotoUniversityTextCorpus::Chunk;
 
 # ABSTRACT: Dependency structure representation.
 
+use strict;
+use warnings;
 use v5.10;
 use Carp qw//;
 use Parse::KyotoUniversityTextCorpus::Types;

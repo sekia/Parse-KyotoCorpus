@@ -1,5 +1,7 @@
 package Parse::KyotoUniversityTextCorpus::MorphemeParser::MeCab;
 
+use strict;
+use warnings;
 use v5.10;
 use Parse::KyotoUniversityTextCorpus::Morpheme::MeCab;
 use Smart::Args;
